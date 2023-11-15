@@ -4,7 +4,7 @@ include "model/sanpham.php";
 include "model/danhmuc.php";
 include "global.php";
 include "view/header.php";
-
+include "view/banner.php";
 $roomnew = loadall_room_home();
 $roomdm = loadall_danhmuc_home();
 if(isset($_GET['act'])&&($_GET['act']!="")){
