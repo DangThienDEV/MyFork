@@ -50,8 +50,8 @@
                         <figure><img src="<?php echo $hinh ?>" alt="#"/></figure>
                      </div> -->
                      <div class="bed_room">
-                        <a href="index.php?act=danhmuc"><h3><?php echo $TenLoai ?></h3></a>
-                        <p><?php echo $MoTaLoai ?></p>
+                        <a href="index.php?act=danhmuc"><h3><?php echo $Ten ?></h3></a>
+                        <p><?php echo $MoTa ?></p>
                         <p><?php echo $GiaPhongChung ?></p>
                      </div>
                   </div>
@@ -144,9 +144,10 @@
                      </div>
                      <div class="bed_room">
                         <a href="index.php?act=sanphamct"><h3><?php echo $TenPhong ?></h3></a>
-                        <a href="index.php?act=sanphamct"><h3><?php echo $TenPhong ?></h3></a>
-                        <a href="index.php?act=sanphamct"><h3><?php echo $TenPhong ?></h3></a>
-                        <p><?php echo $TrangThaiPhong ?></p>
+                        
+                        <a href="index.php?act=sanphamct"><h3 style="color: #e74c3c;"><?php echo $ViTriPhong ?></h3>
+                     
+                        
                      </div>
                   </div>
                </div>

@@ -33,21 +33,22 @@
                <div class="row">
                   <div class="col-md-5">
                      <div class="book_room">
-                        <h1>Book a Room Online</h1>
-                        <form class="book_now">
+                        <h1>Tìm Các Phòng Trống</h1>
+                        <form class="book_now" action="" method="post">
                            <div class="row">
                               <div class="col-md-12">
-                                 <span>Arrival</span>
+                                 <span>Ngày Bắt Đầu</span>
                                  <img class="date_cua" src="images/date.png">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
+                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" id="checkin" name="checkin">
                               </div>
                               <div class="col-md-12">
                                  <span>Departure</span>
                                  <img class="date_cua" src="images/date.png">
-                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" name="dd/mm/yyyy">
+                                 <input class="online_book" placeholder="dd/mm/yyyy" type="date" id="checkout" name="checkout">
                               </div>
                               <div class="col-md-12">
-                                 <button class="book_btn">Book Now</button>
+                                 <button class="book_btn" type="submit">Tìm Kiếm Ngay</button>
+                                 
                               </div>
                            </div>
                         </form>
@@ -58,3 +59,4 @@
          </div>
       </section>
       <!-- end banner -->
+

@@ -10,6 +10,7 @@
   margin: 0 auto;
   padding: 50px;
   background: #fff;
+=
 }
 
 div.elem-group {
@@ -28,6 +29,7 @@ label {
   font-family: 'Nanum Gothic';
   padding-bottom: 10px;
   font-size: 1.25em;
+  
 }
 
 input, select, textarea {
@@ -86,14 +88,6 @@ button:hover {
   </div>
   <hr>
   <div class="elem-group inlined">
-    <label for="adult">Adults</label>
-    <input type="number" id="adult" name="total_adults" placeholder="2" min="1" required>
-  </div>
-  <div class="elem-group inlined">
-    <label for="child">Children</label>
-    <input type="number" id="child" name="total_children" placeholder="2" min="0" required>
-  </div>
-  <div class="elem-group inlined">
     <label for="checkin-date">Check-in Date</label>
     <input type="date" id="checkin-date" name="checkin" required>
   </div>
@@ -102,7 +96,7 @@ button:hover {
     <input type="date" id="checkout-date" name="checkout" required>
   </div>
   <div class="elem-group">
-    <label for="room-selection">Select Room Preference</label>
+    <label for="room-selection">Select Room Prefere</label>
     <select id="room-selection" name="room_preference" required>
         <option value="">Choose a Room from the List</option>
         <option value="connecting">Connecting</option>

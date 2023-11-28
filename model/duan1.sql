@@ -1,21 +1,97 @@
-CREATE TABLE `dichvuphong` (
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Máy chủ: localhost:3306
+-- Thời gian đã tạo: Th10 21, 2023 lúc 08:22 AM
+-- Phiên bản máy phục vụ: 8.0.30
+-- Phiên bản PHP: 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Cơ sở dữ liệu: `wwwwwwww`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `datphong`
+--
+
+CREATE TABLE `datphong` (
   `ID` int NOT NULL,
-  `TenDichVu` varchar(225) DEFAULT NULL,
-  `GiaDichVu` decimal(10,2) DEFAULT NULL
-);
+  `IDKhachHang` int DEFAULT NULL,
+  `IDGanPhong` int DEFAULT NULL,
+  `NgayCheckIn` date DEFAULT NULL,
+  `NgayCheckOut` date DEFAULT NULL,
+  `TongTien` decimal(10,3) DEFAULT NULL,
+  `TienCoc` decimal(10,3) DEFAULT NULL,
+  `TrangThaiDon` varchar(225) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-INSERT INTO `dichvuphong` (`ID`, `TenDichVu`, `GiaDichVu`) VALUES
-(1, 'Dịch vụ Wifi', 5.00),
-(2, 'Dịch vụ đồ ăn sáng', 10.00);
+--
+-- Đang đổ dữ liệu cho bảng `datphong`
+--
 
+INSERT INTO `datphong` (`ID`, `IDKhachHang`, `IDGanPhong`, `NgayCheckIn`, `NgayCheckOut`, `TongTien`, `TienCoc`, `TrangThaiDon`) VALUES
+(7, 1, NULL, '2023-01-01', '2023-01-05', 375.000, 50.000, 'Confirmed'),
+(8, 2, NULL, '2023-02-10', '2023-02-15', 500.000, 75.000, 'Pending');
 
-CREATE TABLE `gandichvuphong` (
-  `IDPhong` int NOT NULL,
-  `IDDichVuPhong` int NOT NULL
-);
+-- --------------------------------------------------------
 
-INSERT INTO `gandichvuphong` (`IDPhong`, `IDDichVuPhong`) VALUES
-(102, 2);
+--
+-- Cấu trúc bảng cho bảng `ganphong`
+--
+
+CREATE TABLE `ganphong` (
+  `ID` int NOT NULL,
+  `IDDatPhong` int DEFAULT NULL,
+  `IDPhong` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ganphong`
+--
+
+INSERT INTO `ganphong` (`ID`, `IDDatPhong`, `IDPhong`) VALUES
+(1, 7, 1),
+(2, 8, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `khachhang`
+--
+
+CREATE TABLE `khachhang` (
+  `ID` int NOT NULL,
+  `TenKhachHang` varchar(225) DEFAULT NULL,
+  `NgaySinh` date DEFAULT NULL,
+  `DiaChiNha` text,
+  `AnhXacNhan` text,
+  `Email` varchar(225) DEFAULT NULL,
+  `TenDangNhap` varchar(225) DEFAULT NULL,
+  `MatKhau` varchar(225) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `khachhang`
+--
+
+INSERT INTO `khachhang` (`ID`, `TenKhachHang`, `NgaySinh`, `DiaChiNha`, `AnhXacNhan`, `Email`, `TenDangNhap`, `MatKhau`) VALUES
+(1, 'John Doe', '1990-01-15', '123 Đường Chính, Thành Phố A', 'duong_dan_anh.jpg', 'john.doe@example.com', 'john_doe', 'password123'),
+(2, 'Jane Smith', '1985-05-20', '456 Đường Sồi, Thị Xã B', 'duong_dan_anh.jpg', 'jane.smith@example.com', 'jane_smith', 'pass456'),
+(3, 'John Doe', '1990-01-15', '123 Đường Chính, Thành Phố A', 'duong_dan_anh.jpg', 'john.doe@example.com', 'john_doe', 'password123'),
+(4, 'Jane Smith', '1985-05-20', '456 Đường Sồi, Thị Xã B', 'duong_dan_anh.jpg', 'jane.smith@example.com', 'jane_smith', 'pass456');
 
 -- --------------------------------------------------------
 
@@ -25,19 +101,22 @@ INSERT INTO `gandichvuphong` (`IDPhong`, `IDDichVuPhong`) VALUES
 
 CREATE TABLE `loaiphong` (
   `ID` int NOT NULL,
-  `TenLoai` varchar(225) DEFAULT NULL,
-  `MoTaLoai` varchar(225) DEFAULT NULL,
-  `GiaPhongChung` decimal(10,2) DEFAULT NULL
-) ;
+  `Ten` varchar(225) DEFAULT NULL,
+  `MoTa` text,
+  `GiaPhongChung` decimal(10,3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `loaiphong`
 --
 
-INSERT INTO `loaiphong` (`ID`, `TenLoai`, `MoTaLoai`, `GiaPhongChung`) VALUES
-(1, 'Phòng Standard', 'Phòng tiêu chuẩn', 100.00),
-(2, 'Phòng Deluxe', 'Phòng sang trọng', 150.00),
-(3, 'Phòng VIP 2', 'Hơi cao tí, hỏng thang máy lú luôn', 150000.00);
+INSERT INTO `loaiphong` (`ID`, `Ten`, `MoTa`, `GiaPhongChung`) VALUES
+(1, 'Phòng Đơn', 'Một phòng đơn ấm cúng với tầm nhìn tuyệt vời', 75.000),
+(2, 'Phòng Đôi', 'Phòng rộng rãi cho hai khách', 100.000),
+(3, 'Suite', 'Suite sang trọng với tiện nghi cao cấp', 150.000),
+(4, 'Phòng Đơn', 'Một phòng đơn ấm cúng với tầm nhìn tuyệt vời', 75.000),
+(5, 'Phòng Đôi', 'Phòng rộng rãi cho hai khách', 100.000),
+(6, 'Suite', 'Suite sang trọng với tiện nghi cao cấp', 150.000);
 
 -- --------------------------------------------------------
 
@@ -47,50 +126,49 @@ INSERT INTO `loaiphong` (`ID`, `TenLoai`, `MoTaLoai`, `GiaPhongChung`) VALUES
 
 CREATE TABLE `phong` (
   `ID` int NOT NULL,
-  `TenPhong` varchar(20) DEFAULT NULL,
+  `TenPhong` varchar(225) DEFAULT NULL,
   `ViTriPhong` varchar(225) DEFAULT NULL,
-  `TrangThaiPhong` varchar(225) DEFAULT NULL,
-  `AnhPhong` varchar(225) DEFAULT NULL,
-  `SoLuongDichVu` int DEFAULT NULL,
-  `TongGiaDichVu` decimal(10,2) DEFAULT NULL,
-  `ThuocLoaiPhong` int DEFAULT NULL
-) ;
+  `TrangThaiPhong` varchar(50) DEFAULT NULL,
+  `AnhPhong` text,
+  `ID_LoaiPhong` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `phong`
 --
 
-INSERT INTO `phong` (`ID`, `TenPhong`, `ViTriPhong`, `TrangThaiPhong`, `AnhPhong`, `SoLuongDichVu`, `TongGiaDichVu`, `ThuocLoaiPhong`) VALUES
-(102, '202B', 'Tầng 2', 'Đang ở', 'image2.jpg', 2, 30.00, 2),
-(103, '301A', 'Tầng 3', 'Trống', NULL, NULL, NULL, 1),
-(104, '102B', 'Tầng 1', 'Đang ở', NULL, 1, 15.00, 2),
-(105, '401A', 'Tầng 4', 'Trống', 'image4.jpg', NULL, NULL, 1),
-(106, 'VIP001', 'Tầng VIP', 'Trống', 'vip_room.jpg', 3, 200.00, 3),
-(107, '201C', 'Tầng 2', 'Đang ở', NULL, NULL, NULL, 1),
-(108, '103A', 'Tầng 1', 'Trống', NULL, 2, 50.00, 2),
-(109, '301A', 'Tầng 3', 'Trống', NULL, NULL, NULL, 1),
-(110, '102B', 'Tầng 1', 'Đang ở', NULL, 1, 15.00, 2),
-(111, '401A', 'Tầng 4', 'Trống', 'image4.jpg', NULL, NULL, 1),
-(112, 'VIP001', 'Tầng VIP', 'Trống', 'vip_room.jpg', 3, 200.00, 3),
-(113, '201C', 'Tầng 2', 'Đang ở', NULL, NULL, NULL, 1),
-(114, '103A', 'Tầng 1', 'Trống', NULL, 2, 50.00, 2);
+INSERT INTO `phong` (`ID`, `TenPhong`, `ViTriPhong`, `TrangThaiPhong`, `AnhPhong`, `ID_LoaiPhong`) VALUES
+(1, 'Phòng 101', 'Tầng 1', 'Còn trống', 'duong_dan_anh1.jpg', 1),
+(2, 'Phòng 202', 'Tầng 2', 'Đang sử dụng', 'duong_dan_anh2.jpg', 2),
+(3, 'Suite A', 'Tầng 3', 'Đã đặt trước', 'duong_dan_anh3.jpg', 3),
+(4, 'Phòng 101', 'Tầng 1', 'Còn trống', 'duong_dan_anh1.jpg', 1),
+(5, 'Phòng 202', 'Tầng 2', 'Đang sử dụng', 'duong_dan_anh2.jpg', 2),
+(6, 'Suite A', 'Tầng 3', 'Đã đặt trước', 'duong_dan_anh3.jpg', 3);
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Chỉ mục cho bảng `dichvuphong`
+-- Chỉ mục cho bảng `datphong`
 --
-ALTER TABLE `dichvuphong`
-  ADD PRIMARY KEY (`ID`);
+ALTER TABLE `datphong`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDGanPhong` (`IDGanPhong`);
 
 --
--- Chỉ mục cho bảng `gandichvuphong`
+-- Chỉ mục cho bảng `ganphong`
 --
-ALTER TABLE `gandichvuphong`
-  ADD PRIMARY KEY (`IDPhong`,`IDDichVuPhong`),
-  ADD KEY `IDDichVuPhong` (`IDDichVuPhong`);
+ALTER TABLE `ganphong`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDDatPhong` (`IDDatPhong`),
+  ADD KEY `IDPhong` (`IDPhong`);
+
+--
+-- Chỉ mục cho bảng `khachhang`
+--
+ALTER TABLE `khachhang`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Chỉ mục cho bảng `loaiphong`
@@ -102,29 +180,67 @@ ALTER TABLE `loaiphong`
 -- Chỉ mục cho bảng `phong`
 --
 ALTER TABLE `phong`
-ADD PRIMARY KEY (`ID`),
-ADD KEY `ThuocLoaiPhong` (`ThuocLoaiPhong`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `ID_LoaiPhong` (`ID_LoaiPhong`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT cho bảng `dichvuphong`
+-- AUTO_INCREMENT cho bảng `datphong`
 --
-ALTER TABLE `dichvuphong`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `datphong`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000;
 
+--
+-- AUTO_INCREMENT cho bảng `ganphong`
+--
+ALTER TABLE `ganphong`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT cho bảng `khachhang`
+--
+ALTER TABLE `khachhang`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
+
+--
+-- AUTO_INCREMENT cho bảng `loaiphong`
+--
 ALTER TABLE `loaiphong`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
+--
+-- AUTO_INCREMENT cho bảng `phong`
+--
 ALTER TABLE `phong`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
-ALTER TABLE `gandichvuphong`
-  ADD CONSTRAINT `gandichvuphong_ibfk_1` FOREIGN KEY (`IDPhong`) REFERENCES `phong` (`ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `gandichvuphong_ibfk_2` FOREIGN KEY (`IDDichVuPhong`) REFERENCES `dichvuphong` (`ID`);
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
 
+--
+-- Các ràng buộc cho bảng `datphong`
+--
+ALTER TABLE `datphong`
+  ADD CONSTRAINT `datphong_ibfk_1` FOREIGN KEY (`IDGanPhong`) REFERENCES `ganphong` (`ID`);
+
+--
+-- Các ràng buộc cho bảng `ganphong`
+--
+ALTER TABLE `ganphong`
+  ADD CONSTRAINT `ganphong_ibfk_1` FOREIGN KEY (`IDDatPhong`) REFERENCES `datphong` (`ID`),
+  ADD CONSTRAINT `ganphong_ibfk_2` FOREIGN KEY (`IDPhong`) REFERENCES `phong` (`ID`);
+
+--
+-- Các ràng buộc cho bảng `phong`
+--
 ALTER TABLE `phong`
-  ADD CONSTRAINT `phong_ibfk_1` FOREIGN KEY (`ThuocLoaiPhong`) REFERENCES `loaiphong` (`ID`);
+  ADD CONSTRAINT `phong_ibfk_1` FOREIGN KEY (`ID_LoaiPhong`) REFERENCES `loaiphong` (`ID`);
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

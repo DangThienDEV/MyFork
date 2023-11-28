@@ -2,22 +2,24 @@
 include "model/pdo.php";
 include "model/sanpham.php";
 include "model/danhmuc.php";
+include "model/sanphamtheodanhmuc.php";
+include "model/form.php";
 include "global.php";
 include "view/header.php";
-
 $roomnew = loadall_room_home();
 $roomdm = loadall_danhmuc_home();
-if(isset($_GET['act'])&&($_GET['act']!="")){
-    $act=$_GET['act'];
-    switch($act){
+$sptheodm = loadall_sanphamtheodanhmuc_home();
+if (isset($_GET['act']) && ($_GET['act'] != "")) {
+    $act = $_GET['act'];
+    switch ($act) {
         case "about":
             include "view/review.php";
             break;
         case "sanpham":
             // lấy dữ liệu
-            if(isset($_GET['iddm'])&&($_GET['iddm']>0)){
+            if (isset($_GET['iddm']) && ($_GET['iddm'] > 0)) {
                 $iddm = ($_GET['iddm']);
-            }else{
+            } else {
                 $iddm = 0;
             }
             $tendm = loadall_room_home($iddm);
@@ -42,11 +44,8 @@ if(isset($_GET['act'])&&($_GET['act']!="")){
             include "stearm/checkout.php";
             break;
     }
-}else{
+} else {
     include "view/home.php";
 }
 
 include "view/footer.php";
-?>
-     
-    
